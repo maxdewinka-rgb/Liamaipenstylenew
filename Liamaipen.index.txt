@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liamaipenstyle</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      background-color: #000;
+      overflow-x: hidden;
+    }
+
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      height: 100vh;
+      background: url('https://i.pinimg.com/1200x/60/05/ed/6005ed47f0528befc7287cf71641d91d.jpg')
+        no-repeat center center/cover;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 0;
+    }
+
+    .hero h1 {
+      position: relative;
+      font-size: 5rem;
+      color: #fff;
+      letter-spacing: 4px;
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 40px rgba(255, 255, 255, 0.2);
+      animation: shake 2s infinite ease-in-out, glow 3s infinite alternate;
+      z-index: 1;
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      letter-spacing: 2px;
+      animation: fadeInUp 2s infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      20% { transform: translate(-2px, 1px) rotate(-0.5deg); }
+      40% { transform: translate(2px, -1px) rotate(0.5deg); }
+      60% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+      80% { transform: translate(1px, -2px) rotate(0.5deg); }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #ccc, 0 0 30px #aaa; }
+      to { text-shadow: 0 0 20px #fff, 0 0 40px #ccc, 0 0 60px #999; }
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(10px); opacity: 0.5; }
+      to { transform: translateY(-10px); opacity: 1; }
+    }
+
+    /* ---------- TEAM SECTION ---------- */
+    .team {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px;
+    }
+
+    .team h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    .members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .member {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px 20px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+      cursor: pointer;
+    }
+
+    .member.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .member:hover {
+      text-shadow: 0 0 15px #fff;
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+    }
+
+    .member a {
+      color: white;
+      text-decoration: none;
+      display: block;
+    }
+
+    .member a:hover {
+      color: #00aaff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>LIAMAIPEN</h1>
+    <div class="scroll-down">▼ SCROLL DOWN ▼</div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section class="team" id="team">
+    <h2>TEAM MEMBERS</h2>
+    <div class="members">
+      <div class="member"><a href="https://www.facebook.com/jobjab.jobjab.jobjab" target="_blank">JOBJAB</a></div>
+      <div class="member"><a href="https://www.facebook.com/serga.vongolay/" target="_blank">SERGA</a></div>
+      <div class="member"><a href="https://www.facebook.com/" target="_blank">SOON</a></div>
+      <div class="member"><a href="https://www.facebook.com/" target="_blank">SOON</a></div>
+      <div class="member"><a href="https://www.facebook.com/" target="_blank">SOON</a></div>
+      <div class="member"><a href="https://www.facebook.com/" target="_blank">SOON</a></div>
+    </div>
+  </section>
+
+  <script>
+    // เอฟเฟกต์เลื่อนแล้วแสดงชื่อทีม
+    const members = document.querySelectorAll('.member');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    members.forEach(member => observer.observe(member));
+  </script>
+</body>
+</html>
